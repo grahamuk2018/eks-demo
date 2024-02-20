@@ -77,5 +77,3 @@ applications:
       path: "infrastructure/helm/charts/website"
       revision: main
       helm:
-        valueFiles:
-          - "../../environments/nonprod/website/values.yaml"

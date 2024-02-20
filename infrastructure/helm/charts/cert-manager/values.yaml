@@ -1,0 +1,8 @@
+certmanager:
+  installCRDs: true
+
+  extraArgs:
+    # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted
+    - --enable-certificate-owner-ref=true
+    # This avoids querying external DNS servers, forces cert-manager to use the DNS server configured for the EKS cluster
+    - --dns01-recursive-nameservers-only

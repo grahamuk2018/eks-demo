@@ -1,0 +1,26 @@
+prometheus:
+  server:
+    ingress:
+      ## If true, Prometheus server Ingress will be created
+      ##
+      enabled: true
+     # ingressClassName: nginx
+
+      annotations: 
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+      ## Prometheus server Ingress hostnames
+      ## Must be provided if Ingress is enabled
+      ##
+      hosts:
+        - prometheus.gsking.co.uk
+
+      ## Prometheus server Ingress TLS configuration
+      ## Secrets must be manually created in the namespace
+      ##
+      tls:
+        - secretName: prometheus-server-tls
+          hosts:
+            - prometheus.gsking.co.uk
+
+  

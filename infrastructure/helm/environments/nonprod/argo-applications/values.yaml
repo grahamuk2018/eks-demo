@@ -1,0 +1,80 @@
+applications:
+  create: true
+  values:
+    argo-applications:
+      syncWave: 1
+      namespace: argocd
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/argo-applications"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/argo-applications/values.yaml"
+    argo-cd:
+      syncWave: 2
+      namespace: argocd
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: charts/argocd
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/argocd/values.yaml"
+    cert-manager:
+      syncWave: 2
+      namespace: cert-manager
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/cert-manager"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/cert-manager/values.yaml"
+    cert-manager-letsencrypt-issuer:
+      syncWave: 2
+      namespace: cert-manager
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/cert-manager-letsencrypt-issuer"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/cert-manager-letsencrypt-issuer/values.yaml"
+    ingress-nginx:
+      syncWave: 2
+      namespace: ingress-nginx
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/ingress-nginx"
+      revision: main
+    prometheus:
+      syncWave: 3
+      namespace: observability
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/prometheus"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/prometheus/values.yaml"
+    grafana:
+      syncWave: 3
+      namespace: observability
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/grafana"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/grafana/values.yaml"
+    website:
+      syncWave: 4
+      namespace: default
+      project: default
+      repo: https://github.com/grahamuk2018/eks-demo
+      path: "charts/website"
+      revision: main
+      helm:
+        valueFiles:
+          - "../../environments/nonprod/website/values.yaml"

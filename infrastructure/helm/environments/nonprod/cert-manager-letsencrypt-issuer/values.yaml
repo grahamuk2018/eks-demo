@@ -1,0 +1,4 @@
+dnsZones:
+  - "gsking.co.uk"
+
+selfsingedEnabled: true

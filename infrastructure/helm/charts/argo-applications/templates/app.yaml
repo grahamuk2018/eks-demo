@@ -1,0 +1,55 @@
+{{- if and .Values.applications.create .Values.applications.values }}
+{{- range $key, $values := .Values.applications.values }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $key }}
+  namespace: argocd
+  annotations:
+{{- if $values.syncHook }}
+    argocd.argoproj.io/hook: "{{ $values.syncHook }}"
+{{- end }}
+
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ $values.namespace }}
+    server: {{ tpl ($values.destinationServer | default "https://kubernetes.default.svc") $ | quote }}
+  project: {{ $values.project | default "default" }}
+  source:
+    {{- if $values.path }}
+    path: {{ $values.path }}
+    {{- end }}
+    {{- if $values.chart }}
+    chart: {{ $values.chart }}
+    {{- end }}
+    repoURL: {{ $values.repo }}
+    targetRevision: {{ tpl $values.revision $ | quote}}
+{{- if $values.helm }}
+    helm:
+{{- if $values.helm.valueFiles }}
+      valueFiles:
+{{- range $values.helm.valueFiles }}
+        - {{ tpl . $ | quote }}
+{{- end }} {{- /* End of range $values.helm.valueFiles  */}}
+{{- end }} {{- /* End of if $values.helm.valueFiles  */}}
+{{- if $values.helm.parameters }}
+      parameters:
+{{- range $values.helm.parameters }}
+      - name: {{ tpl .name $ | quote }}
+        value: {{ tpl .value $ | quote }}
+{{- end }} {{- /* End of range $values.helm.parameters  */}}
+{{- end }} {{- /* End of if $values.helm.parameters  */}}
+{{- end }} {{- /* End of if $values.helm  */}}
+{{- if $values.syncPolicy }}
+  syncPolicy:
+{{ toYaml $values.syncPolicy | indent 4 }}
+{{- else }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+{{- end }} {{- /* End of if $values.syncPolicy  */}}
+---
+{{- end }}
+{{- end }}

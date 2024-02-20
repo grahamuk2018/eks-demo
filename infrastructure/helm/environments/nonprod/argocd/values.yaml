@@ -1,2 +1,5 @@
 hosts:
   argo.gsking.co.uk
+
+ingress:
+  enabled: true

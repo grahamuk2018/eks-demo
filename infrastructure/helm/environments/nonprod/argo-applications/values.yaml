@@ -6,7 +6,7 @@ applications:
       namespace: argocd
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/argo-applications"
+      path: "infratructure/helm/charts/argo-applications"
       revision: main
       helm:
         valueFiles:
@@ -16,7 +16,7 @@ applications:
       namespace: argocd
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: charts/argocd
+      path: "infratructure/helm/charts/argocd"
       revision: main
       helm:
         valueFiles:
@@ -26,7 +26,7 @@ applications:
       namespace: cert-manager
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/cert-manager"
+      path: "infratructure/helm/charts/cert-manager"
       revision: main
       helm:
         valueFiles:
@@ -36,7 +36,7 @@ applications:
       namespace: cert-manager
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/cert-manager-letsencrypt-issuer"
+      path: "infratructure/helm/charts/cert-manager-letsencrypt-issuer"
       revision: main
       helm:
         valueFiles:
@@ -46,14 +46,14 @@ applications:
       namespace: ingress-nginx
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/ingress-nginx"
+      path: "infratructure/helm/charts/ingress-nginx"
       revision: main
     prometheus:
       syncWave: 3
       namespace: observability
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/prometheus"
+      path: "infratructure/helm/charts/prometheus"
       revision: main
       helm:
         valueFiles:
@@ -63,7 +63,7 @@ applications:
       namespace: observability
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/grafana"
+      path: "infratructure/helm/charts/grafana"
       revision: main
       helm:
         valueFiles:
@@ -73,7 +73,7 @@ applications:
       namespace: default
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
-      path: "charts/website"
+      path: "infratructure/helm/charts/website"
       revision: main
       helm:
         valueFiles:

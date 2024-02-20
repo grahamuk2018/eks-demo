@@ -49,28 +49,8 @@ applications:
       repo: https://github.com/grahamuk2018/eks-demo
       path: "infrastructure/helm/charts/ingress-nginx"
       revision: main
-    prometheus:
-      syncWave: 3
-      namespace: observability
-      project: default
-      repo: https://github.com/grahamuk2018/eks-demo
-      path: "infrastructure/helm/charts/prometheus"
-      revision: main
-      helm:
-        valueFiles:
-          - "../../environments/nonprod/prometheus/values.yaml"
-    grafana:
-      syncWave: 3
-      namespace: observability
-      project: default
-      repo: https://github.com/grahamuk2018/eks-demo
-      path: "infrastructure/helm/charts/grafana"
-      revision: main
-      helm:
-        valueFiles:
-          - "../../environments/nonprod/grafana/values.yaml"
     website:
-      syncWave: 4
+      syncWave: 3
       namespace: default
       project: default
       repo: https://github.com/grahamuk2018/eks-demo
